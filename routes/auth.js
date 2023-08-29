@@ -74,9 +74,11 @@ router.post('/register', [
             type: typeOfUser || 'local',
             photoUrl: photoUrl || 'https://image.shutterstock.com/image-vector/person-gray-photo-placeholder-man-260nw-1259815156.jpg'
         }).then(lastId => {
-            if (lastId > 0) {
+            if (lastId.affectedRows > 0) {
+                console.log(lastId.affectedRows);
                 res.status(201).json({message: 'Registration successful'});
             } else {
+                console.log(lastId.affectedRows);
                 res.status(501).json({message: 'Registration failed'});
             }
         }).catch(err => res.status(433).json({error: err}));
